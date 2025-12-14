@@ -4,11 +4,12 @@ import com.example.sweetshop.entity.Sweet;
 import com.example.sweetshop.repository.SweetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Service
 public class SweetService {
     @Autowired
     private SweetRepository sweetRepository;
@@ -21,9 +22,9 @@ public class SweetService {
         return sweetRepository.findAll();
     }
 
-    public List<Sweet> searchSweetsUsingParam(String name, String category, Double minPrice, Double maxPrice){
-        return sweetRepository.search(name, category, minPrice, maxPrice);
-    }
+//    public List<Sweet> searchSweetsUsingParam(String name, String category, Double minPrice, Double maxPrice){
+//        return sweetRepository.search(name, category, minPrice, maxPrice);
+//    }
 
     public Optional<Sweet> getSweetById(String id) {
         return sweetRepository.findById(id);

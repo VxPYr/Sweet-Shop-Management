@@ -4,14 +4,17 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
 
 @Document(collection = "users")
 @Data
-public class User {
+public class User implements UserDetails {
     @Id
     private String id;
 
-    @Indexed(unique = true)
     private String username;
 
     @Indexed(unique = true)
@@ -20,5 +23,10 @@ public class User {
     private String password;
 
     private Role role;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return java.util.List.of(() -> "ROLE_" + role);
+    }
 
 }
